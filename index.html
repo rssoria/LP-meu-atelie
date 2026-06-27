@@ -305,31 +305,25 @@
       }
 
       .hero-card {
-        background: linear-gradient(180deg, #fffefb 0%, #fff5e9 100%);
-        border: 1px solid var(--line);
-        border-radius: 28px 30px 24px 30px;
-        box-shadow: var(--shadow);
-        padding: 18px;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
       }
 
       .hero-card::before {
-        content: "";
-        position: absolute;
-        inset: 10px;
-        border: 1px dashed rgba(210, 100, 58, 0.28);
-        border-radius: 20px;
-        pointer-events: none;
+        content: none;
       }
 
       .hero-dashboard-image {
         width: 100%;
         display: block;
-        border-radius: 16px;
-        border: 1px solid #f2ded0;
-        background: #fff;
-        box-shadow: 0 8px 22px rgba(84, 46, 28, 0.1);
+        border: none;
+        background: transparent;
+        box-shadow: none;
       }
 
       .hero-dashboard-fallback {
@@ -778,8 +772,8 @@
           <aside class="hero-card reveal" aria-label="Exemplo de painel">
             <img
               class="hero-dashboard-image"
-              src="assets/imagemdivulcacao.png"
-              alt="Painel do sistema Meu Ateliê"
+              src="assets/notebook.png"
+              alt="Notebook com a divulgação do Meu Ateliê"
               onerror="
                 this.style.display = 'none';
                 this.nextElementSibling.style.display = 'block';
