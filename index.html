@@ -542,6 +542,64 @@
         font-weight: 700;
       }
 
+      .privacy {
+        padding-top: 12px;
+      }
+
+      .privacy-card {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 254, 251, 0.78);
+        padding: 22px;
+      }
+
+      .privacy-card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .cookie-banner {
+        position: fixed;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
+        width: min(960px, calc(100vw - 24px));
+        background: rgba(255, 251, 246, 0.98);
+        border: 1px solid #e8d3c2;
+        border-radius: 16px;
+        box-shadow: 0 16px 28px rgba(84, 46, 28, 0.2);
+        padding: 14px;
+        display: none;
+        z-index: 999;
+      }
+
+      .cookie-banner.is-visible {
+        display: block;
+      }
+
+      .cookie-banner p {
+        margin: 0;
+        color: #5f5147;
+        font-size: 0.92rem;
+      }
+
+      .cookie-actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .cookie-link-btn {
+        border: none;
+        background: transparent;
+        color: var(--brand-strong);
+        font-weight: 800;
+        cursor: pointer;
+        padding: 0.45rem 0.7rem;
+      }
+
       .reveal {
         opacity: 0;
         transform: translateY(16px);
@@ -639,48 +697,16 @@
           flex-direction: column;
           align-items: flex-start;
         }
+
+        .cookie-banner {
+          bottom: 10px;
+          padding: 12px;
+        }
       }
     </style>
-
-    <!-- Meta Pixel Code -->
-    <script>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js",
-      );
-      fbq("init", "1624328116361376");
-      fbq("track", "PageView");
-    </script>
-    <!-- End Meta Pixel Code -->
   </head>
 
   <body>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=1624328116361376&ev=PageView&noscript=1"
-    /></noscript>
     <header class="site-header">
       <div class="container header-inner">
         <a href="#top" class="brand" aria-label="Ir para o topo">
@@ -700,6 +726,7 @@
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#como-funciona">Como funciona</a>
           <a href="#planos">Planos</a>
+          <a href="#politica-privacidade">Privacidade</a>
           <a href="#projeto">Projeto</a>
         </nav>
 
@@ -1010,19 +1037,132 @@
           </div>
         </div>
       </section>
+
+      <section id="politica-privacidade" class="privacy">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Privacidade</span>
+              <h2>Política de Privacidade e Cookies</h2>
+            </div>
+          </div>
+
+          <article class="privacy-card reveal">
+            <p>
+              Respeitamos sua privacidade. Utilizamos cookies essenciais para o
+              funcionamento da página e, com seu consentimento, cookies de
+              medição e marketing para entender desempenho e melhorar campanhas.
+            </p>
+            <p>
+              Dados de navegação podem ser processados para eventos de análise,
+              como visualização de página e clique em checkout, inclusive por
+              integrações com a Meta (Pixel e API de Conversão).
+            </p>
+            <p>
+              Você pode aceitar ou recusar cookies não essenciais no aviso de
+              cookies. Para alterar sua escolha depois, use o link “Gerenciar
+              cookies” no rodapé.
+            </p>
+            <p>
+              Para dúvidas sobre privacidade e dados, entre em contato pelo
+              e-mail: meuatelie.suporte@gmail.com.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <div class="container site-footer-inner">
         <span>Projeto Meu Ateliê</span>
         <span>Gestão inteligente para ateliês criativos</span>
+        <a href="#politica-privacidade">Política de Privacidade</a>
+        <button class="cookie-link-btn" id="manage-cookies" type="button">
+          Gerenciar cookies
+        </button>
         <a href="mailto:meuatelie.suporte@gmail.com"
           >Contato: meuatelie.suporte@gmail.com</a
         >
       </div>
     </footer>
 
+    <aside class="cookie-banner" id="cookie-banner" aria-live="polite">
+      <p>
+        Utilizamos cookies essenciais e, com sua autorização, cookies de
+        medição/marketing para melhorar sua experiência e campanhas.
+      </p>
+      <div class="cookie-actions">
+        <button class="btn btn-primary" id="accept-cookies" type="button">
+          Aceitar cookies
+        </button>
+        <button class="btn btn-outline" id="reject-cookies" type="button">
+          Recusar não essenciais
+        </button>
+        <a class="btn btn-outline" href="#politica-privacidade">
+          Ver política
+        </a>
+      </div>
+    </aside>
+
     <script>
+      const META_PIXEL_ID = "1624328116361376";
+      const COOKIE_CONSENT_KEY = "meuatelie_cookie_consent";
+      let metaPixelLoaded = false;
+
+      function getConsentStatus() {
+        return localStorage.getItem(COOKIE_CONSENT_KEY);
+      }
+
+      function hasTrackingConsent() {
+        return getConsentStatus() === "accepted";
+      }
+
+      function loadMetaPixelIfNeeded() {
+        if (!hasTrackingConsent() || metaPixelLoaded) return;
+
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod
+              ? n.callMethod.apply(n, arguments)
+              : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(
+          window,
+          document,
+          "script",
+          "https://connect.facebook.net/en_US/fbevents.js",
+        );
+
+        fbq("init", META_PIXEL_ID);
+        fbq("track", "PageView");
+        metaPixelLoaded = true;
+      }
+
+      function setConsentStatus(status) {
+        localStorage.setItem(COOKIE_CONSENT_KEY, status);
+      }
+
+      function updateCookieBannerVisibility() {
+        const banner = document.getElementById("cookie-banner");
+        if (!banner) return;
+        if (getConsentStatus()) {
+          banner.classList.remove("is-visible");
+        } else {
+          banner.classList.add("is-visible");
+        }
+      }
+
       const observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -1037,6 +1177,35 @@
       for (const element of document.querySelectorAll(".reveal")) {
         observer.observe(element);
       }
+
+      const acceptCookiesBtn = document.getElementById("accept-cookies");
+      const rejectCookiesBtn = document.getElementById("reject-cookies");
+      const manageCookiesBtn = document.getElementById("manage-cookies");
+
+      if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener("click", () => {
+          setConsentStatus("accepted");
+          updateCookieBannerVisibility();
+          loadMetaPixelIfNeeded();
+        });
+      }
+
+      if (rejectCookiesBtn) {
+        rejectCookiesBtn.addEventListener("click", () => {
+          setConsentStatus("rejected");
+          updateCookieBannerVisibility();
+        });
+      }
+
+      if (manageCookiesBtn) {
+        manageCookiesBtn.addEventListener("click", () => {
+          localStorage.removeItem(COOKIE_CONSENT_KEY);
+          updateCookieBannerVisibility();
+        });
+      }
+
+      updateCookieBannerVisibility();
+      loadMetaPixelIfNeeded();
 
       // Meta CAPI client bridge: send deduplicated checkout events to your backend endpoint.
       const META_CAPI_ENDPOINT = "/api/meta-conversions";
@@ -1089,6 +1258,10 @@
       );
       for (const button of checkoutButtons) {
         button.addEventListener("click", () => {
+          if (!hasTrackingConsent()) {
+            return;
+          }
+
           const plan = button.getAttribute("data-plan") || "desconhecido";
           const value = Number(button.getAttribute("data-value") || 0);
           const eventId = generateEventId(plan);
