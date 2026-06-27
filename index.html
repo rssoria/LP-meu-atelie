@@ -79,7 +79,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 24px;
-        padding: 14px 0;
+        padding: 12px 0;
       }
 
       .brand {
@@ -157,14 +157,14 @@
       }
 
       .hero {
-        padding: 76px 0 66px;
+        padding: 88px 0 74px;
       }
 
       .hero-grid {
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
         align-items: center;
-        gap: 34px;
+        gap: 40px;
       }
 
       .kicker {
@@ -208,14 +208,14 @@
       }
 
       .hero-actions {
-        margin-top: 28px;
+        margin-top: 24px;
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
       }
 
       .course-highlight {
-        margin-top: 14px;
+        margin-top: 16px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -229,17 +229,17 @@
       }
 
       .hero-metrics {
-        margin-top: 32px;
+        margin-top: 26px;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 11px;
+        gap: 12px;
       }
 
       .metric {
         background: rgba(255, 254, 251, 0.7);
         border: 1px solid var(--line);
         border-radius: 14px;
-        padding: 14px;
+        padding: 16px;
       }
 
       .metric strong {
@@ -258,7 +258,7 @@
         border: 1px solid var(--line);
         border-radius: var(--radius-xl);
         box-shadow: var(--shadow);
-        padding: 14px;
+        padding: 18px;
         position: relative;
         overflow: hidden;
       }
@@ -287,15 +287,15 @@
       }
 
       section {
-        padding: 36px 0;
+        padding: 52px 0;
       }
 
       .section-head {
         display: flex;
         justify-content: space-between;
         align-items: end;
-        gap: 18px;
-        margin-bottom: 18px;
+        gap: 22px;
+        margin-bottom: 24px;
       }
 
       .section-head p {
@@ -311,13 +311,13 @@
       .features-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
+        gap: 16px;
       }
 
       .feature {
         border: 1px solid var(--line);
         border-radius: var(--radius-lg);
-        padding: 18px;
+        padding: 22px;
         background: rgba(255, 254, 251, 0.74);
       }
 
@@ -325,6 +325,20 @@
         border: 2px solid rgba(210, 100, 58, 0.45);
         background: linear-gradient(135deg, #fff7ee 0%, #fff1e2 100%);
         box-shadow: 0 12px 24px rgba(164, 67, 31, 0.14);
+      }
+
+      .refund-note {
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(15, 143, 128, 0.1);
+        border: 1px solid rgba(15, 143, 128, 0.28);
+        color: #0b7165;
+        font-size: 0.82rem;
+        font-weight: 800;
       }
 
       .feature h3 {
@@ -341,14 +355,14 @@
       .flows {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
+        gap: 14px;
       }
 
       .flow-card {
         border-radius: 16px;
         border: 1px solid var(--line);
         background: var(--surface);
-        padding: 16px;
+        padding: 18px;
       }
 
       .flow-number {
@@ -364,7 +378,7 @@
       }
 
       .cta {
-        padding: 76px 0 92px;
+        padding: 86px 0 100px;
       }
 
       .cta-shell {
@@ -383,12 +397,12 @@
         border: 1px solid #efd8c8;
         border-radius: 30px;
         box-shadow: var(--shadow);
-        padding: 34px clamp(18px, 5vw, 58px);
+        padding: 40px clamp(20px, 5vw, 58px);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 18px;
+        gap: 22px;
       }
 
       .cta h2 {
@@ -402,7 +416,7 @@
 
       .site-footer {
         border-top: 1px solid #eed9c9;
-        padding: 24px 0 36px;
+        padding: 28px 0 40px;
       }
 
       .site-footer-inner {
@@ -433,8 +447,13 @@
       }
 
       @media (max-width: 1024px) {
+        section {
+          padding: 44px 0;
+        }
+
         .hero-grid {
           grid-template-columns: 1fr;
+          gap: 26px;
         }
 
         .features-grid {
@@ -457,7 +476,30 @@
         }
 
         .hero {
-          padding-top: 52px;
+          padding: 52px 0 42px;
+        }
+
+        section {
+          padding: 32px 0;
+        }
+
+        .section-head {
+          margin-bottom: 16px;
+          gap: 14px;
+        }
+
+        .feature,
+        .flow-card {
+          padding: 16px;
+        }
+
+        .cta {
+          padding: 58px 0 68px;
+        }
+
+        .cta-shell {
+          padding: 26px 16px;
+          gap: 14px;
         }
 
         .hero-metrics {
@@ -485,7 +527,10 @@
             class="brand-logo"
             src="assets/logo.png"
             alt="Logo Meu Ateliê"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'inline-block';
+            "
           />
           <span class="brand-name brand-fallback">Meu Ateliê</span>
         </a>
@@ -516,9 +561,7 @@
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#planos"
-                >Ver planos</a
-              >
+              <a class="btn btn-primary" href="#planos">Ver planos</a>
               <a class="btn btn-outline" href="#funcionalidades"
                 >Ver funcionalidades</a
               >
@@ -549,7 +592,10 @@
               class="hero-dashboard-image"
               src="assets/imagemdivulcacao.png"
               alt="Painel do sistema Meu Ateliê"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
             />
             <div class="hero-dashboard-fallback">
               Prévia do painel do Meu Ateliê
@@ -589,8 +635,8 @@
             <article class="feature reveal">
               <h3>Gestão de materiais</h3>
               <p>
-                Cadastro e organização dos materiais usados em cada produto,
-                com foco no cálculo de custos.
+                Cadastro e organização dos materiais usados em cada produto, com
+                foco no cálculo de custos.
               </p>
             </article>
             <article class="feature reveal">
@@ -651,9 +697,7 @@
             <article class="flow-card reveal">
               <span class="flow-number">03</span>
               <h3>Gestão de materiais e custos</h3>
-              <p>
-                Entenda o consumo de materiais e o custo real de cada peça.
-              </p>
+              <p>Entenda o consumo de materiais e o custo real de cada peça.</p>
             </article>
             <article class="flow-card reveal">
               <span class="flow-number">04</span>
@@ -672,9 +716,7 @@
           <div class="section-head reveal">
             <div>
               <span class="kicker">Sobre o projeto</span>
-              <h2>
-                Feito por uma artesã para outras artesãs e artesãos.
-              </h2>
+              <h2>Feito por uma artesã para outras artesãs e artesãos.</h2>
             </div>
             <p>
               O projeto une tecnologia e rotina criativa para transformar
@@ -704,14 +746,23 @@
               <p style="margin-bottom: 14px">
                 Ideal para começar agora com baixo investimento.
               </p>
-              <p style="font-size: 1.25rem; font-weight: 800; color: #1b1511">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 800;
+                  color: #1b1511;
+                  margin-bottom: 10px;
+                "
+              >
                 R$ 24,90/mês
               </p>
+              <p class="refund-note">7 dias para pedir reembolso</p>
               <a
                 class="btn btn-primary"
                 href="https://pay.hotmart.com/T106483864Q?off=ahrxzyzp"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="margin: 10px 0"
                 >Assinar mensal</a
               >
             </article>
@@ -721,14 +772,23 @@
               <p style="margin-bottom: 14px">
                 Melhor custo-benefício para crescer com previsibilidade.
               </p>
-              <p style="font-size: 1.25rem; font-weight: 800; color: #1b1511">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 800;
+                  color: #1b1511;
+                  margin-bottom: 10px;
+                "
+              >
                 R$ 268,60/ano
               </p>
+              <p class="refund-note">7 dias para pedir reembolso</p>
               <a
                 class="btn btn-primary"
                 href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="margin-top: 10px"
                 >Assinar anual</a
               >
             </article>
@@ -747,7 +807,7 @@
               </h2>
               <p>
                 Escolha sua assinatura e comece a organizar pedidos, produção e
-                financeiro em um só lugar.
+                financeiro em um só lugar. Você tem 7 dias para devolução.
               </p>
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 10px">
@@ -756,6 +816,7 @@
                 href="https://pay.hotmart.com/T106483864Q?off=ahrxzyzp"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="margin-bottom: 10px"
                 >Assinar mensal R$ 24,90</a
               >
               <a
