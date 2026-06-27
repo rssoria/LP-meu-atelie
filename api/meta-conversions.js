@@ -1,3 +1,29 @@
+function parseFbcFromEventSourceUrl(eventSourceUrl) {
+  if (!eventSourceUrl || typeof eventSourceUrl !== "string") return "";
+
+  try {
+    const url = new URL(eventSourceUrl);
+    const fbclid = url.searchParams.get("fbclid");
+    if (!fbclid) return "";
+    return `fb.1.${Date.now()}.${fbclid}`;
+  } catch {
+    return "";
+  }
+}
+
+function normalizeFbc(value) {
+  if (!value || typeof value !== "string") return "";
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+
+  // Expected format: fb.1.<timestamp>.<fbclid>
+  if (/^fb\.1\.\d+\..+/.test(trimmed)) {
+    return trimmed;
+  }
+
+  return "";
+}
+
 export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.setHeader("Allow", "POST, OPTIONS");
@@ -32,6 +58,10 @@ export default async function handler(req, res) {
       });
     }
 
+    const providedFbc = normalizeFbc(body.user_data?.fbc);
+    const fallbackFbc = parseFbcFromEventSourceUrl(body.event_source_url);
+    const finalFbc = providedFbc || fallbackFbc || undefined;
+
     const eventData = {
       event_name: body.event_name,
       event_time: body.event_time,
@@ -40,7 +70,7 @@ export default async function handler(req, res) {
       event_source_url: body.event_source_url,
       user_data: {
         fbp: body.user_data?.fbp || undefined,
-        fbc: body.user_data?.fbc || undefined,
+        fbc: finalFbc,
         client_user_agent:
           body.user_data?.client_user_agent || req.headers["user-agent"],
         client_ip_address:
@@ -78,7 +108,18 @@ export default async function handler(req, res) {
       });
     }
 
-    return res.status(200).json({ ok: true, meta: responseData });
+    return res.status(200).json({
+      ok: true,
+      meta: responseData,
+      diagnostics: {
+        fbc_sent: Boolean(finalFbc),
+        fbc_source: providedFbc
+          ? "payload"
+          : fallbackFbc
+            ? "event_source_url"
+            : "none",
+      },
+    });
   } catch (error) {
     return res.status(500).json({
       error: "Unexpected error while sending CAPI event",
