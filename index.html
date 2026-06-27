@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Meu Ateliê: sistema para organizar pedidos, clientes, materiais, produção e financeiro do seu ateliê em um único lugar."
+    />
+    <title>Meu Ateliê | Seu ateliê sob controle</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #fff9f3;
+        --surface: #fffefb;
+        --text: #1b1511;
+        --muted: #5f5147;
+        --brand: #d2643a;
+        --brand-strong: #a8431f;
+        --accent: #0f8f80;
+        --line: #efdfd1;
+        --shadow: 0 16px 38px rgba(84, 46, 28, 0.14);
+        --radius-xl: 26px;
+        --radius-lg: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at 8% 8%,
+            rgba(210, 100, 58, 0.18),
+            transparent 42%
+          ),
+          radial-gradient(
+            circle at 88% 14%,
+            rgba(15, 143, 128, 0.16),
+            transparent 38%
+          ),
+          linear-gradient(165deg, #fff9f3 0%, #fff2df 58%, #ffe7cf 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(1120px, 92vw);
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 249, 243, 0.75);
+        border-bottom: 1px solid rgba(239, 223, 209, 0.6);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .brand-logo {
+        width: 66px;
+        height: 66px;
+        object-fit: contain;
+      }
+
+      .brand-name {
+        font-family: "Sora", sans-serif;
+        font-weight: 600;
+        font-size: 1.02rem;
+        letter-spacing: 0.01em;
+        text-transform: none;
+      }
+
+      .brand-fallback {
+        display: none;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 0.93rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        padding: 0.88rem 1.3rem;
+        font-size: 0.94rem;
+        transition:
+          transform 180ms ease,
+          box-shadow 220ms ease,
+          background 220ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(120deg, var(--brand), #e5884f);
+        color: #fff;
+        box-shadow: 0 10px 22px rgba(164, 67, 31, 0.35);
+      }
+
+      .btn-outline {
+        color: var(--brand-strong);
+        background: rgba(210, 100, 58, 0.1);
+        border: 1px solid rgba(210, 100, 58, 0.22);
+      }
+
+      .hero {
+        padding: 76px 0 66px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 34px;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--brand-strong);
+        margin-bottom: 14px;
+      }
+
+      .kicker::before {
+        content: "";
+        width: 32px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--brand);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4.2vw, 3.55rem);
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+      }
+
+      .hero p {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.03rem, 1.7vw, 1.14rem);
+        max-width: 60ch;
+      }
+
+      .hero-actions {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero-metrics {
+        margin-top: 32px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 11px;
+      }
+
+      .metric {
+        background: rgba(255, 254, 251, 0.7);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.28rem;
+        font-family: "Sora", sans-serif;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.87rem;
+      }
+
+      .hero-card {
+        background: linear-gradient(180deg, #fffefb 0%, #fff5e9 100%);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        padding: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-dashboard-image {
+        width: 100%;
+        display: block;
+        border-radius: 16px;
+        border: 1px solid #f2ded0;
+        background: #fff;
+        box-shadow: 0 8px 22px rgba(84, 46, 28, 0.1);
+      }
+
+      .hero-dashboard-fallback {
+        display: none;
+        border: 1px dashed #e7c8b5;
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .hero-card::after {
+        content: none;
+      }
+
+      section {
+        padding: 36px 0;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      h2 {
+        font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: 18px;
+        background: rgba(255, 254, 251, 0.74);
+      }
+
+      .feature h3 {
+        margin-bottom: 8px;
+        font-size: 1.03rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .flows {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .flow-card {
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: 16px;
+      }
+
+      .flow-number {
+        font-family: "Sora", sans-serif;
+        color: var(--brand-strong);
+        font-size: 0.93rem;
+      }
+
+      .flow-card p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .cta {
+        padding: 76px 0 92px;
+      }
+
+      .cta-shell {
+        background:
+          radial-gradient(
+            circle at 15% 18%,
+            rgba(15, 143, 128, 0.2),
+            transparent 44%
+          ),
+          radial-gradient(
+            circle at 78% 80%,
+            rgba(210, 100, 58, 0.24),
+            transparent 40%
+          ),
+          linear-gradient(120deg, #fff6ee 0%, #ffedd9 100%);
+        border: 1px solid #efd8c8;
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        padding: 34px clamp(18px, 5vw, 58px);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .cta h2 {
+        max-width: 22ch;
+      }
+
+      .cta p {
+        margin: 10px 0 0;
+        color: var(--muted);
+      }
+
+      .site-footer {
+        border-top: 1px solid #eed9c9;
+        padding: 24px 0 36px;
+      }
+
+      .site-footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        color: #7b6a5d;
+        font-size: 0.9rem;
+      }
+
+      .site-footer a {
+        color: #7b6a5d;
+        font-weight: 700;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 650ms ease,
+          transform 650ms ease;
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .flows {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          display: none;
+        }
+
+        .brand-logo {
+          width: 54px;
+          height: 54px;
+        }
+
+        .hero {
+          padding-top: 52px;
+        }
+
+        .hero-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid,
+        .flows {
+          grid-template-columns: 1fr;
+        }
+
+        .site-footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#top" class="brand" aria-label="Ir para o topo">
+          <img
+            class="brand-logo"
+            src="assets/logo.png"
+            alt="Logo Meu Ateliê"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
+          />
+          <span class="brand-name brand-fallback">Meu Ateliê</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+          <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#planos">Planos</a>
+          <a href="#projeto">Projeto</a>
+        </nav>
+
+        <a class="btn btn-primary" href="#planos">Assinar agora</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <span class="kicker">Gestão para ateliês criativos</span>
+            <h1>
+              Organize pedidos, produção e financeiro sem planilhas confusas.
+            </h1>
+            <p>
+              Meu Ateliê é um projeto pensado para quem vive de criação.
+              Centralize clientes, etapas de produção, materiais e resultados em
+              uma rotina simples e visual.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#planos"
+                >Ver planos</a
+              >
+              <a class="btn btn-outline" href="#funcionalidades"
+                >Ver funcionalidades</a
+              >
+            </div>
+
+            <div class="hero-metrics" aria-label="Indicadores principais">
+              <div class="metric">
+                <strong>+40</strong>
+                <span>recursos para operação do ateliê</span>
+              </div>
+              <div class="metric">
+                <strong>1 painel</strong>
+                <span>com pedidos, caixa e materiais</span>
+              </div>
+              <div class="metric">
+                <strong>100% web</strong>
+                <span>acesso fácil no celular e desktop</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal" aria-label="Exemplo de painel">
+            <img
+              class="hero-dashboard-image"
+              src="assets/imagemdivulcacao.png"
+              alt="Painel do sistema Meu Ateliê"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <div class="hero-dashboard-fallback">
+              Prévia do painel do Meu Ateliê
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="funcionalidades">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Funcionalidades</span>
+              <h2>Ferramentas que ajudam do atendimento até a entrega</h2>
+            </div>
+            <p>
+              Cada módulo foi pensado para simplificar o dia a dia do ateliê e
+              diminuir o retrabalho.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature reveal">
+              <h3>Gestão de pedidos</h3>
+              <p>
+                Fluxo por etapas, prazos, status e observações para acompanhar
+                cada peça.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Cadastro de clientes</h3>
+              <p>
+                Histórico de medidas, contatos e preferências em um único
+                perfil.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Controle de materiais</h3>
+              <p>
+                Entrada, saída e níveis de estoque para evitar falta de insumos.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Financeiro do ateliê</h3>
+              <p>
+                Receitas, despesas e previsão de caixa com visão clara de
+                resultados.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Organização por categoria</h3>
+              <p>
+                Produtos e processos padronizados para ganhar velocidade no
+                atendimento.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Base pronta para crescer</h3>
+              <p>
+                Estrutura pensada para novas integrações e recursos conforme a
+                demanda.
+              </p>
+            </article>
+            <article class="feature reveal">
+              <h3>Curso completo</h3>
+              <p>Curso completo ensinando a usar o sistema.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="como-funciona">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Como funciona</span>
+              <h2>Um fluxo simples para dominar sua rotina</h2>
+            </div>
+          </div>
+
+          <div class="flows">
+            <article class="flow-card reveal">
+              <span class="flow-number">01</span>
+              <h3>Cadastre o pedido</h3>
+              <p>
+                Defina produto, cliente, prazos e observações de forma
+                organizada.
+              </p>
+            </article>
+            <article class="flow-card reveal">
+              <span class="flow-number">02</span>
+              <h3>Acompanhe a produção</h3>
+              <p>Atualize status das etapas e evite atrasos no processo.</p>
+            </article>
+            <article class="flow-card reveal">
+              <span class="flow-number">03</span>
+              <h3>Controle materiais e custos</h3>
+              <p>
+                Saiba quanto foi usado, quanto sobrou e qual o custo real da
+                peça.
+              </p>
+            </article>
+            <article class="flow-card reveal">
+              <span class="flow-number">04</span>
+              <h3>Entregue com previsibilidade</h3>
+              <p>
+                Tenha uma visão completa para atender com mais segurança e
+                qualidade.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projeto">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Sobre o projeto</span>
+              <h2>
+                Feito por uma artesã para outras artesãs e artesãos.
+              </h2>
+            </div>
+            <p>
+              O projeto une tecnologia e rotina criativa para transformar
+              tarefas operacionais em processos claros, escaláveis e fáceis de
+              executar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="planos">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Assinatura</span>
+              <h2>Escolha o melhor plano para seu ateliê</h2>
+            </div>
+            <p>
+              Comece no plano mensal ou economize com o anual. Acesso completo
+              às funcionalidades do Meu Ateliê.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature reveal">
+              <h3>Plano Mensal</h3>
+              <p style="margin-bottom: 14px">
+                Ideal para começar agora com baixo investimento.
+              </p>
+              <p style="font-size: 1.25rem; font-weight: 800; color: #1b1511">
+                R$ 24,90/mês
+              </p>
+              <a
+                class="btn btn-primary"
+                href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Assinar mensal</a
+              >
+            </article>
+
+            <article class="feature reveal">
+              <h3>Plano Anual</h3>
+              <p style="margin-bottom: 14px">
+                Melhor custo-benefício para crescer com previsibilidade.
+              </p>
+              <p style="font-size: 1.25rem; font-weight: 800; color: #1b1511">
+                R$ 268,60/ano
+              </p>
+              <a
+                class="btn btn-primary"
+                href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Assinar anual</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contato">
+        <div class="container">
+          <div class="cta-shell reveal">
+            <div>
+              <span class="kicker">Convite</span>
+              <h2>
+                Leve mais controle para seu ateliê sem perder seu estilo de
+                trabalho.
+              </h2>
+              <p>
+                Escolha sua assinatura e comece a organizar pedidos, produção e
+                financeiro em um só lugar.
+              </p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px">
+              <a
+                class="btn btn-primary"
+                href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Assinar mensal R$ 24,90</a
+              >
+              <a
+                class="btn btn-outline"
+                href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Assinar anual R$ 268,60</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <span>Projeto Meu Ateliê</span>
+        <span>Gestão inteligente para ateliês criativos</span>
+        <a href="mailto:meuatelie.suporte@gmail.com"
+          >Contato: meuatelie.suporte@gmail.com</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+            }
+          }
+        },
+        { threshold: 0.2 },
+      );
+
+      for (const element of document.querySelectorAll(".reveal")) {
+        observer.observe(element);
+      }
+    </script>
+  </body>
+</html>
