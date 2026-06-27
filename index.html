@@ -214,6 +214,20 @@
         gap: 12px;
       }
 
+      .course-highlight {
+        margin-top: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.6rem 0.95rem;
+        border-radius: 999px;
+        border: 1px solid rgba(210, 100, 58, 0.32);
+        background: rgba(210, 100, 58, 0.11);
+        color: var(--brand-strong);
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
       .hero-metrics {
         margin-top: 32px;
         display: grid;
@@ -305,6 +319,12 @@
         border-radius: var(--radius-lg);
         padding: 18px;
         background: rgba(255, 254, 251, 0.74);
+      }
+
+      .feature--highlight {
+        border: 2px solid rgba(210, 100, 58, 0.45);
+        background: linear-gradient(135deg, #fff7ee 0%, #fff1e2 100%);
+        box-shadow: 0 12px 24px rgba(164, 67, 31, 0.14);
       }
 
       .feature h3 {
@@ -504,6 +524,10 @@
               >
             </div>
 
+            <div class="course-highlight">
+              Inclui curso completo ensinando o passo a passo do sistema
+            </div>
+
             <div class="hero-metrics" aria-label="Indicadores principais">
               <div class="metric">
                 <strong>+40</strong>
@@ -589,9 +613,12 @@
                 demanda.
               </p>
             </article>
-            <article class="feature reveal">
+            <article class="feature feature--highlight reveal">
               <h3>Curso completo</h3>
-              <p>Curso completo ensinando a usar o sistema.</p>
+              <p>
+                Curso completo ensinando a usar o sistema, do básico ao
+                avançado, com aula prática para cada módulo.
+              </p>
             </article>
           </div>
         </div>
