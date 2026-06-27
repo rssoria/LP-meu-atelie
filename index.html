@@ -467,6 +467,22 @@
         font-size: 0.93rem;
       }
 
+      .atelier-video-shell {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: clamp(10px, 2vw, 16px);
+        background: rgba(255, 254, 251, 0.84);
+        box-shadow: 0 12px 28px rgba(84, 46, 28, 0.12);
+      }
+
+      .atelier-video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        display: block;
+        border-radius: 16px;
+        background: #1b1511;
+      }
+
       .cta {
         padding: 86px 0 100px;
       }
@@ -719,6 +735,7 @@
         <nav class="nav" aria-label="Navegação principal">
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#como-funciona">Como funciona</a>
+          <a href="#atelie-por-dentro">Meu Ateliê por dentro</a>
           <a href="#planos">Planos</a>
           <a href="#politica-privacidade">Privacidade</a>
           <a href="#projeto">Projeto</a>
@@ -926,6 +943,33 @@
               tarefas operacionais em processos claros, escaláveis e fáceis de
               executar.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="atelie-por-dentro">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Visão geral</span>
+              <h2>Um pouco do "Meu Ateliê" por dentro</h2>
+            </div>
+            <p>
+              Veja um resumo rápido para conhecer o ambiente e entender como
+              tudo funciona na prática.
+            </p>
+          </div>
+
+          <div class="atelier-video-shell reveal">
+            <video
+              class="atelier-video"
+              controls
+              preload="metadata"
+              poster="assets/imagemdivulcacao.png"
+            >
+              <source src="assets/overview.mp4" type="video/mp4" />
+              Seu navegador não suporta reprodução de vídeo.
+            </video>
           </div>
         </div>
       </section>
