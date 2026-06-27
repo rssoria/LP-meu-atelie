@@ -931,6 +931,9 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 style="margin: 10px 0"
+                data-meta-checkout="true"
+                data-plan="mensal"
+                data-value="24.90"
                 >Assinar mensal</a
               >
             </article>
@@ -957,6 +960,9 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 style="margin-top: 10px"
+                data-meta-checkout="true"
+                data-plan="anual"
+                data-value="268.60"
                 >Assinar anual</a
               >
             </article>
@@ -985,6 +991,9 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 style="margin-bottom: 10px"
+                data-meta-checkout="true"
+                data-plan="mensal"
+                data-value="24.90"
                 >Assinar mensal R$ 24,90</a
               >
               <a
@@ -992,6 +1001,9 @@
                 href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-meta-checkout="true"
+                data-plan="anual"
+                data-value="268.60"
                 >Assinar anual R$ 268,60</a
               >
             </div>
@@ -1024,6 +1036,99 @@
 
       for (const element of document.querySelectorAll(".reveal")) {
         observer.observe(element);
+      }
+
+      // Meta CAPI client bridge: send deduplicated checkout events to your backend endpoint.
+      const META_CAPI_ENDPOINT = "/api/meta-conversions";
+
+      function getCookie(name) {
+        const match = document.cookie.match(
+          new RegExp("(^| )" + name + "=([^;]+)"),
+        );
+        return match ? decodeURIComponent(match[2]) : "";
+      }
+
+      function getOrCreateFbc() {
+        const url = new URL(window.location.href);
+        const fbclid = url.searchParams.get("fbclid");
+        const existingFbc = getCookie("_fbc");
+        if (existingFbc) return existingFbc;
+
+        if (!fbclid) return "";
+
+        const fbc = `fb.1.${Date.now()}.${fbclid}`;
+        document.cookie = `_fbc=${encodeURIComponent(fbc)}; path=/; max-age=${60 * 60 * 24 * 90}; SameSite=Lax`;
+        return fbc;
+      }
+
+      function generateEventId(plan) {
+        return `${plan}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      }
+
+      async function sendMetaCapiEvent(payload) {
+        if (!META_CAPI_ENDPOINT) {
+          return;
+        }
+
+        try {
+          await fetch(META_CAPI_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+            keepalive: true,
+          });
+        } catch (_) {
+          // Silent fail to avoid impacting checkout click.
+        }
+      }
+
+      const checkoutButtons = document.querySelectorAll(
+        "[data-meta-checkout='true']",
+      );
+      for (const button of checkoutButtons) {
+        button.addEventListener("click", () => {
+          const plan = button.getAttribute("data-plan") || "desconhecido";
+          const value = Number(button.getAttribute("data-value") || 0);
+          const eventId = generateEventId(plan);
+
+          if (typeof fbq === "function") {
+            fbq(
+              "track",
+              "InitiateCheckout",
+              {
+                content_name: `Plano ${plan}`,
+                content_category: "Assinatura",
+                currency: "BRL",
+                value,
+              },
+              { eventID: eventId },
+            );
+          }
+
+          const capiPayload = {
+            event_name: "InitiateCheckout",
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: eventId,
+            action_source: "website",
+            event_source_url: window.location.href,
+            custom_data: {
+              content_name: `Plano ${plan}`,
+              content_category: "Assinatura",
+              currency: "BRL",
+              value,
+              plan,
+            },
+            user_data: {
+              fbp: getCookie("_fbp") || "",
+              fbc: getOrCreateFbc(),
+              client_user_agent: navigator.userAgent,
+            },
+          };
+
+          sendMetaCapiEvent(capiPayload);
+        });
       }
     </script>
   </body>
