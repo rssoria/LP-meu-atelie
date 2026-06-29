@@ -86,6 +86,46 @@
         box-shadow: 0 4px 14px rgba(84, 46, 28, 0.08);
       }
 
+      .promo-strip {
+        position: sticky;
+        top: 91px;
+        z-index: 19;
+        border-bottom: 1px solid rgba(167, 50, 13, 0.14);
+        background: linear-gradient(
+          90deg,
+          #8f2f14 0%,
+          #d2643a 52%,
+          #e78950 100%
+        );
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(143, 47, 20, 0.2);
+      }
+
+      .promo-strip-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 11px 0;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .promo-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.32rem 0.62rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.34);
+      }
+
+      .promo-countdown {
+        min-width: 62px;
+        text-align: center;
+      }
+
       .header-inner {
         display: flex;
         align-items: center;
@@ -292,6 +332,48 @@
         gap: 12px;
       }
 
+      .coupon-alert {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.62rem 0.88rem;
+        border-radius: 12px;
+        border: 1px solid rgba(167, 50, 13, 0.26);
+        background: linear-gradient(
+          140deg,
+          rgba(255, 231, 209, 0.82),
+          rgba(255, 245, 234, 0.92)
+        );
+        color: #8f2f14;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .coupon-alert strong {
+        font-family: "Sora", sans-serif;
+      }
+
+      .urgency-list {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .urgency-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0.42rem 0.68rem;
+        border-radius: 999px;
+        border: 1px solid #f0d5bf;
+        background: rgba(255, 254, 251, 0.8);
+        color: #6f4a36;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
       .course-highlight {
         margin-top: 16px;
         display: inline-flex;
@@ -463,6 +545,30 @@
         font-size: 0.95rem;
       }
 
+      .pain-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .pain-item {
+        border: 1px solid #efdac8;
+        border-left: 6px solid rgba(210, 100, 58, 0.6);
+        border-radius: 16px;
+        background: rgba(255, 254, 251, 0.78);
+        padding: 18px;
+      }
+
+      .pain-item h3 {
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      .pain-item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
       .flows {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -498,6 +604,144 @@
         margin: 8px 0 0;
         color: var(--muted);
         font-size: 0.93rem;
+      }
+
+      .comparison-wrap {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 254, 251, 0.82);
+        overflow: hidden;
+      }
+
+      .comparison-head,
+      .comparison-row {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+
+      .comparison-head {
+        background: #fdf0e5;
+        font-family: "Sora", sans-serif;
+        font-size: 0.94rem;
+      }
+
+      .comparison-head div,
+      .comparison-row div {
+        padding: 12px 14px;
+        border-bottom: 1px solid #f0dfd2;
+      }
+
+      .comparison-row div:nth-child(2) {
+        color: #8f2f14;
+        font-weight: 700;
+      }
+
+      .comparison-row div:nth-child(3) {
+        color: #0b7165;
+        font-weight: 800;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .testimonial {
+        border: 1px solid #efdccf;
+        border-radius: 18px;
+        background: rgba(255, 254, 251, 0.86);
+        padding: 20px;
+      }
+
+      .testimonial p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .testimonial strong {
+        display: block;
+        margin-top: 12px;
+        color: #47352a;
+        font-size: 0.9rem;
+      }
+
+      .price-old {
+        display: inline-flex;
+        margin-right: 8px;
+        color: #7f6b5f;
+        font-size: 0.95rem;
+        text-decoration: line-through;
+      }
+
+      .price-off {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 4px;
+        padding: 0.22rem 0.56rem;
+        border-radius: 999px;
+        background: rgba(15, 143, 128, 0.12);
+        color: #0b7165;
+        font-weight: 800;
+        font-size: 0.78rem;
+      }
+
+      .feature .plan-points {
+        margin: 12px 0;
+        padding-left: 18px;
+        color: #5b4c41;
+        font-size: 0.9rem;
+      }
+
+      .feature .plan-points li {
+        margin-bottom: 6px;
+      }
+
+      .live-proof {
+        position: fixed;
+        right: 14px;
+        bottom: 18px;
+        z-index: 30;
+        border: 1px solid #efcfb8;
+        border-radius: 14px;
+        background: rgba(255, 252, 247, 0.98);
+        box-shadow: 0 14px 28px rgba(84, 46, 28, 0.2);
+        padding: 10px 12px;
+        width: min(318px, calc(100vw - 20px));
+        font-size: 0.82rem;
+        color: #5a473b;
+      }
+
+      .live-proof strong {
+        color: #8f2f14;
+      }
+
+      .sticky-offer {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        width: min(940px, calc(100vw - 20px));
+        border: 1px solid #e5c8b2;
+        border-radius: 15px;
+        background: rgba(255, 247, 237, 0.98);
+        box-shadow: 0 18px 30px rgba(84, 46, 28, 0.22);
+        padding: 10px;
+        z-index: 29;
+      }
+
+      .sticky-offer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .sticky-offer-copy {
+        color: #694b3b;
+        font-size: 0.86rem;
+        font-weight: 700;
       }
 
       .atelier-video-shell {
@@ -672,6 +916,10 @@
       }
 
       @media (max-width: 1024px) {
+        .promo-strip {
+          top: 79px;
+        }
+
         section {
           padding: 44px 0;
         }
@@ -688,6 +936,10 @@
         .flows {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        .testimonial-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media (max-width: 720px) {
@@ -701,6 +953,17 @@
 
         .header-actions .btn-primary {
           display: none;
+        }
+
+        .promo-strip {
+          top: 72px;
+        }
+
+        .promo-strip-inner {
+          font-size: 0.78rem;
+          gap: 8px;
+          padding: 9px 0;
+          flex-wrap: wrap;
         }
 
         .header-actions .btn {
@@ -750,9 +1013,40 @@
           grid-template-columns: 1fr;
         }
 
+        .pain-grid,
+        .comparison-head,
+        .comparison-row {
+          grid-template-columns: 1fr;
+        }
+
+        .comparison-head div,
+        .comparison-row div {
+          border-bottom: 1px solid #f3e6dc;
+        }
+
         .features-grid,
         .flows {
           grid-template-columns: 1fr;
+        }
+
+        .sticky-offer {
+          bottom: 86px;
+          padding: 8px;
+        }
+
+        .sticky-offer-inner {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .sticky-offer .btn {
+          width: 100%;
+        }
+
+        .live-proof {
+          right: 10px;
+          bottom: 14px;
+          width: min(290px, calc(100vw - 20px));
         }
 
         .site-footer-inner {
@@ -761,7 +1055,7 @@
         }
 
         .cookie-banner {
-          bottom: 10px;
+          bottom: 148px;
           padding: 12px;
         }
       }
@@ -813,19 +1107,41 @@
       </div>
     </header>
 
+    <div class="promo-strip" aria-live="polite">
+      <div class="container promo-strip-inner">
+        <span class="promo-pill">Cupom ARTE75 aplicado</span>
+        <span>75% OFF no plano anual por tempo limitado</span>
+        <span class="promo-pill promo-countdown" id="promo-countdown"
+          >05:00</span
+        >
+      </div>
+    </div>
+
     <main id="top">
       <section class="hero">
         <div class="container hero-grid">
           <div class="reveal">
             <span class="kicker">Gestão para ateliês criativos</span>
             <h1>
-              Organize pedidos, produção e financeiro sem planilhas confusas.
+              Pare de perder lucro no achismo e venda com segurança todos os
+              dias.
             </h1>
             <p>
-              Meu Ateliê é um projeto pensado para quem vive de criação.
-              Centralize clientes, etapas de produção, materiais e resultados em
-              uma rotina simples e visual.
+              Meu Ateliê organiza preço, pedidos, materiais e financeiro em um
+              só lugar para você cobrar o preço certo, enviar propostas com
+              confiança e transformar produção em lucro real.
             </p>
+
+            <div class="coupon-alert">
+              Cupom <strong>ARTE75</strong> confirmado. Desconto já aplicado no
+              plano anual.
+            </div>
+
+            <div class="urgency-list" aria-label="Gatilhos de oferta">
+              <span class="urgency-item">Restam 5 vagas com o desconto</span>
+              <span class="urgency-item">Garantia de 7 dias sem risco</span>
+              <span class="urgency-item">Bônus: curso completo incluso</span>
+            </div>
 
             <div class="hero-actions">
               <a class="btn btn-primary" href="#planos">Ver planos</a>
@@ -868,6 +1184,50 @@
               Prévia do painel do Meu Ateliê
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section id="dores">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Você se identifica?</span>
+              <h2>
+                Sinais de que seu ateliê está vendendo abaixo do que merece
+              </h2>
+            </div>
+            <p>
+              Se você reconhece essas situações, o problema não é seu produto. É
+              falta de sistema.
+            </p>
+          </div>
+
+          <div class="pain-grid">
+            <article class="pain-item reveal">
+              <h3>Cliente pede preço e você trava</h3>
+              <p>
+                O valor sai no chute e cada pedido vira uma dúvida sobre lucro.
+              </p>
+            </article>
+            <article class="pain-item reveal">
+              <h3>Entrou dinheiro, mas sobrou pouco</h3>
+              <p>O mês fecha sem clareza de custos, ganho e resultado real.</p>
+            </article>
+            <article class="pain-item reveal">
+              <h3>Você manda no WhatsApp e o cliente some</h3>
+              <p>
+                Sem apresentação profissional, o valor percebido cai e a venda
+                esfria.
+              </p>
+            </article>
+            <article class="pain-item reveal">
+              <h3>Desconto toda hora por insegurança</h3>
+              <p>
+                Sem dados, fica difícil sustentar seu preço e defender seu
+                trabalho.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -989,7 +1349,7 @@
             </article>
             <article class="flow-card reveal">
               <span class="flow-number">04</span>
-              <h3>Entregue com previsibilidade</h3>
+              <h3>Entregue com mais segurança</h3>
               <p>
                 Tenha uma visão completa para atender com mais segurança e
                 qualidade.
@@ -1047,7 +1407,7 @@
           <div class="section-head reveal">
             <div>
               <span class="kicker">Assinatura</span>
-              <h2>Escolha o melhor plano para seu ateliê</h2>
+              <h2>Oferta ativa hoje: escolha seu plano e comece ainda agora</h2>
             </div>
             <p>
               Comece no plano mensal ou economize com o anual. Acesso completo
@@ -1071,6 +1431,12 @@
               >
                 R$ 24,90/mês
               </p>
+              <span class="price-off">Sem fidelidade</span>
+              <ul class="plan-points">
+                <li>Acesso completo ao sistema</li>
+                <li>Suporte especializado</li>
+                <li>Bônus: curso completo</li>
+              </ul>
               <p class="refund-note">7 dias para pedir reembolso</p>
               <a
                 class="btn btn-primary"
@@ -1085,10 +1451,10 @@
               >
             </article>
 
-            <article class="feature reveal">
+            <article class="feature feature--highlight reveal">
               <h3>Plano Anual</h3>
               <p style="margin-bottom: 14px">
-                Melhor custo-benefício para crescer com previsibilidade.
+                Melhor oferta para quem quer crescer com segurança.
               </p>
               <p
                 style="
@@ -1098,8 +1464,15 @@
                   margin-bottom: 10px;
                 "
               >
+                <span class="price-old">de R$ 1.074,00</span>
                 R$ 268,60/ano
               </p>
+              <span class="price-off">75% OFF com cupom ARTE75</span>
+              <ul class="plan-points">
+                <li>Economia real no ano</li>
+                <li>Acesso total + atualizações</li>
+                <li>Plano que mais gera vendas no ateliê</li>
+              </ul>
               <p class="refund-note">7 dias para pedir reembolso</p>
               <a
                 class="btn btn-primary"
@@ -1117,18 +1490,100 @@
         </div>
       </section>
 
+      <section id="comparativo">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Com ou sem sistema</span>
+              <h2>
+                Você escolhe entre continuar no chute ou vender com método
+              </h2>
+            </div>
+          </div>
+
+          <div
+            class="comparison-wrap reveal"
+            role="table"
+            aria-label="Comparativo de resultados"
+          >
+            <div class="comparison-head" role="row">
+              <div>Critério</div>
+              <div>Sem Meu Ateliê</div>
+              <div>Com Meu Ateliê</div>
+            </div>
+            <div class="comparison-row" role="row">
+              <div>Definição de preço</div>
+              <div>Preço no achismo</div>
+              <div>Preço com custo e lucro</div>
+            </div>
+            <div class="comparison-row" role="row">
+              <div>Orçamento</div>
+              <div>Texto solto no WhatsApp</div>
+              <div>Apresentação mais profissional</div>
+            </div>
+            <div class="comparison-row" role="row">
+              <div>Financeiro</div>
+              <div>Fim do mês sem clareza</div>
+              <div>Lucro e despesas visíveis</div>
+            </div>
+            <div class="comparison-row" role="row">
+              <div>Descontos</div>
+              <div>Concede por insegurança</div>
+              <div>Defende o valor com dados</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="depoimentos">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="kicker">Prova social</span>
+              <h2>Quem começou a usar, percebeu o lucro aparecer</h2>
+            </div>
+          </div>
+
+          <div class="testimonial-grid">
+            <article class="testimonial reveal">
+              <p>
+                Eu vendia bem, mas não sabia se lucrava. No primeiro dia
+                descobri onde estava perdendo dinheiro e reajustei meus preços
+                com segurança.
+              </p>
+              <strong>Carla, ateliê de papelaria personalizada</strong>
+            </article>
+            <article class="testimonial reveal">
+              <p>
+                O orçamento profissional mudou meu fechamento. Antes o cliente
+                sumia no WhatsApp. Agora responde mais rápido e aprova com menos
+                dúvidas.
+              </p>
+              <strong>Juliana, lembrancinhas e kits</strong>
+            </article>
+            <article class="testimonial reveal">
+              <p>
+                Só o controle de materiais já pagou a assinatura. Parei de
+                cobrar barato sem querer e passei a enxergar lucro em cada
+                pedido.
+              </p>
+              <strong>Amanda, ateliê de produtos personalizados</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="cta" id="contato">
         <div class="container">
           <div class="cta-shell reveal">
             <div>
               <span class="kicker">Convite</span>
               <h2>
-                Leve mais controle para seu ateliê sem perder seu estilo de
-                trabalho.
+                Cupom aplicado. Oferta ativa. Agora só falta você começar.
               </h2>
               <p>
-                Escolha sua assinatura e comece a organizar pedidos, produção e
-                financeiro em um só lugar. Você tem 7 dias para devolução.
+                Assine hoje e transforme gestão em um diferencial no seu ateliê.
+                Garantia de 7 dias para testar sem risco.
               </p>
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 10px">
@@ -1231,10 +1686,78 @@
       </div>
     </aside>
 
+    <aside class="sticky-offer" id="sticky-offer" aria-live="polite">
+      <div class="sticky-offer-inner">
+        <span class="sticky-offer-copy">
+          Cupom ARTE75 aplicado. Restam
+          <strong id="offer-slots">5</strong> vagas com desconto.
+        </span>
+        <a
+          class="btn btn-primary"
+          href="https://pay.hotmart.com/T106483864Q?off=un70bgjf"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-meta-checkout="true"
+          data-plan="anual"
+          data-value="268.60"
+        >
+          Garantir plano anual com 75% OFF
+        </a>
+      </div>
+    </aside>
+
+    <aside class="live-proof" id="live-proof" aria-live="polite">
+      <strong>Amanda</strong> acabou de assinar o plano anual com cupom.
+    </aside>
+
     <script>
       const META_PIXEL_ID = "1624328116361376";
       const COOKIE_CONSENT_KEY = "meuatelie_cookie_consent";
       let metaPixelLoaded = false;
+
+      const promoCountdownEl = document.getElementById("promo-countdown");
+      const offerSlotsEl = document.getElementById("offer-slots");
+      const liveProofEl = document.getElementById("live-proof");
+
+      function startPromoCountdown(durationMinutes = 5) {
+        if (!promoCountdownEl) return;
+        const endTime = Date.now() + durationMinutes * 60 * 1000;
+
+        function updateCountdown() {
+          const diff = Math.max(0, endTime - Date.now());
+          const minutes = Math.floor(diff / 60000)
+            .toString()
+            .padStart(2, "0");
+          const seconds = Math.floor((diff % 60000) / 1000)
+            .toString()
+            .padStart(2, "0");
+          promoCountdownEl.textContent = `${minutes}:${seconds}`;
+
+          if (diff <= 0) {
+            promoCountdownEl.textContent = "00:00";
+            clearInterval(timer);
+          }
+        }
+
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+      }
+
+      function startSocialProofLoop() {
+        if (!liveProofEl || !offerSlotsEl) return;
+        const buyers = ["Amanda", "Fernanda", "Carla", "Juliana", "Patricia"];
+        let index = 0;
+        let slots = 5;
+
+        setInterval(() => {
+          index = (index + 1) % buyers.length;
+          if (slots > 2) {
+            slots -= 1;
+            offerSlotsEl.textContent = String(slots);
+          }
+          liveProofEl.innerHTML = `<strong>${buyers[index]}</strong> acabou de assinar o plano anual com cupom.`;
+        }, 7000);
+      }
 
       function getConsentStatus() {
         return localStorage.getItem(COOKIE_CONSENT_KEY);
@@ -1333,6 +1856,8 @@
 
       updateCookieBannerVisibility();
       loadMetaPixelIfNeeded();
+      startPromoCountdown(5);
+      startSocialProofLoop();
 
       // Meta CAPI client bridge: send deduplicated checkout events to your backend endpoint.
       const META_CAPI_ENDPOINT = "/api/meta-conversions";
