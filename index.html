@@ -617,6 +617,7 @@
       .comparison-row {
         display: grid;
         grid-template-columns: 1.4fr 1fr 1fr;
+        min-width: 700px;
       }
 
       .comparison-head {
@@ -700,7 +701,7 @@
 
       .live-proof {
         position: fixed;
-        right: 14px;
+        left: 14px;
         bottom: 18px;
         z-index: 30;
         border: 1px solid #efcfb8;
@@ -711,6 +712,17 @@
         width: min(318px, calc(100vw - 20px));
         font-size: 0.82rem;
         color: #5a473b;
+        opacity: 0;
+        transform: translateY(14px);
+        pointer-events: none;
+        transition:
+          opacity 260ms ease,
+          transform 260ms ease;
+      }
+
+      .live-proof.is-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .live-proof strong {
@@ -1013,15 +1025,29 @@
           grid-template-columns: 1fr;
         }
 
-        .pain-grid,
-        .comparison-head,
-        .comparison-row {
+        .pain-grid {
           grid-template-columns: 1fr;
         }
 
-        .comparison-head div,
-        .comparison-row div {
-          border-bottom: 1px solid #f3e6dc;
+        .comparison-wrap {
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .comparison-head,
+        .comparison-row {
+          min-width: 640px;
+          grid-template-columns: 1.2fr 1fr 1fr;
+        }
+
+        .comparison-wrap::-webkit-scrollbar {
+          height: 8px;
+        }
+
+        .comparison-wrap::-webkit-scrollbar-thumb {
+          background: rgba(210, 100, 58, 0.34);
+          border-radius: 999px;
         }
 
         .features-grid,
@@ -1044,7 +1070,7 @@
         }
 
         .live-proof {
-          right: 10px;
+          left: 10px;
           bottom: 14px;
           width: min(290px, calc(100vw - 20px));
         }
@@ -1467,6 +1493,9 @@
                 <span class="price-old">de R$ 298,80</span>
                 R$ 268,60/ano
               </p>
+              <p style="margin-bottom: 10px; color: #5b4c41; font-weight: 700">
+                12x de R$ 22,39
+              </p>
               <span class="price-off">10% OFF com cupom ANUAL10</span>
               <ul class="plan-points">
                 <li>Economia real no ano</li>
@@ -1606,7 +1635,7 @@
                 data-meta-checkout="true"
                 data-plan="anual"
                 data-value="268.60"
-                >Assinar anual R$ 268,60</a
+                >Assinar anual 12x R$ 22,39</a
               >
               <a
                 class="btn btn-whatsapp"
@@ -1716,7 +1745,6 @@
       let metaPixelLoaded = false;
 
       const promoCountdownEl = document.getElementById("promo-countdown");
-      const offerSlotsEl = document.getElementById("offer-slots");
       const liveProofEl = document.getElementById("live-proof");
 
       function startPromoCountdown(durationMinutes = 5) {
@@ -1744,19 +1772,37 @@
       }
 
       function startSocialProofLoop() {
-        if (!liveProofEl || !offerSlotsEl) return;
-        const buyers = ["Amanda", "Fernanda", "Carla", "Juliana", "Patricia"];
-        let index = 0;
-        let slots = 5;
+        if (!liveProofEl) return;
 
-        setInterval(() => {
-          index = (index + 1) % buyers.length;
-          if (slots > 2) {
-            slots -= 1;
-            offerSlotsEl.textContent = String(slots);
-          }
-          liveProofEl.innerHTML = `<strong>${buyers[index]}</strong> acabou de assinar o plano anual com cupom.`;
-        }, 7000);
+        const buyers = [
+          "Amanda",
+          "Fernanda",
+          "Carla",
+          "Juliana",
+          "Patricia",
+          "Beatriz",
+          "Renata",
+          "Camila",
+        ];
+
+        function scheduleNextPopup() {
+          const delay =
+            Math.floor(Math.random() * (120000 - 50000 + 1)) + 50000;
+
+          window.setTimeout(() => {
+            const randomBuyer =
+              buyers[Math.floor(Math.random() * buyers.length)];
+            liveProofEl.innerHTML = `<strong>${randomBuyer}</strong> acabou de comprar.`;
+            liveProofEl.classList.add("is-visible");
+
+            window.setTimeout(() => {
+              liveProofEl.classList.remove("is-visible");
+              scheduleNextPopup();
+            }, 6000);
+          }, delay);
+        }
+
+        scheduleNextPopup();
       }
 
       function getConsentStatus() {
